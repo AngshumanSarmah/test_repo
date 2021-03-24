@@ -5,8 +5,8 @@ pipeline {
         stage('Deploy') {
             when {
               expression {
-                 echo "currentBuild 1" currentBuild
-                 echo "currentBuild 2" %currentBuild%
+                 echo "BUILD_ID 1" BUILD_ID
+                 echo "BUILD_ID 2" %BUILD_ID%
                   
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
               }
