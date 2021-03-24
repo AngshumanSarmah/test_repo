@@ -1,20 +1,17 @@
 pipeline {
     agent any
-    
-    triggers {
-       cron('TZ=Europe/London\n30 12 * * 1')
-    }
 
     stages {
-        stage('Hello') {
-            steps {
-                echo 'Sending out emails'
+        stage('Deploy') {
+            when {
+              expression {
+                 echo "BUILD_ID 2 ${env.BUILD_ID}"
+                  
+              }
             }
-        }
-    }
-    post{
-        always{
-            emailext body: 'Hi, \nThis is a test', subject: 'Checking jenkinsfile', to: 'angshuman.sarmah@gmail.com'
+            steps {
+                sh 'make publish'
+            }
         }
     }
 }
